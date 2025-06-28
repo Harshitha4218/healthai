@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+ibm-watsonx-ai
+python-multipart
+jinja2

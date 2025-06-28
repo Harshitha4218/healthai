@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HealthAI: Intelligent Health Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f4faff;
+    }
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #1e90ff;
+    }
+    form {
+      margin-bottom: 2rem;
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    input {
+      padding: 0.6rem;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 0.5rem;
+    }
+    button {
+      padding: 0.6rem 1rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    #diseaseResult, #remedyResult {
+      margin-top: 0.5rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🩺 HealthAI: Intelligent Health Assistant</h1>
+
+  <h2>🔍 Symptoms Identifier</h2>
+  <form id="symptomForm">
+    <input type="text" name="symptoms" id="symptoms" placeholder="Enter symptoms (e.g., fever, cough)" required>
+    <button type="submit">Predict Disease</button>
+  </form>
+  <div id="diseaseResult"></div>
+
+  <h2>🌿 Home Remedies</h2>
+  <form id="remedyForm">
+    <input type="text" name="disease" id="disease" placeholder="Enter disease (e.g., cold)" required>
+    <button type="submit">Get Remedy</button>
+  </form>
+  <div id="remedyResult"></div>
+
+  <script>
+    document.getElementById("symptomForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const symptoms = document.getElementById("symptoms").value;
+      const formData = new FormData();
+      formData.append("symptoms", symptoms);
+
+      const res = await fetch("/predict_disease", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      document.getElementById("diseaseResult").innerText = "🧠 " + data.response;
+    });
+
+    document.getElementById("remedyForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const disease = document.getElementById("disease").value;
+      const formData = new FormData();
+      formData.append("disease", disease);
+
+      const res = await fetch("/home_remedy", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      document.getElementById("remedyResult").innerText = "🌱 " + data.response;
+    });
+  </script>
+
+</body>
+</html>
