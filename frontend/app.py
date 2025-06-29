@@ -1,5 +1,4 @@
 import streamlit as st
-import requests
 
 st.set_page_config(page_title="HealthAI", layout="wide")
 
@@ -19,20 +18,9 @@ def main():
 
     if st.button("Submit Symptoms", key="submit_symptoms"):
         if prompt.strip() != "":
-            try:
-                response = requests.post(
-                    "http://127.0.0.1:8000/generate",
-                    json={"prompt": prompt}
-                )
-
-                if response.status_code == 200:
-                    result = response.json()
-                    st.subheader("💡 AI Response:")
-                    st.success(result["response"])
-                else:
-                    st.error(f"❌ Backend error: {response.status_code} - {response.text}")
-            except Exception as e:
-                st.error(f"⚠️ Request failed: {e}")
+            # ✅ Mocked AI Response
+            st.subheader("💡 AI Response:")
+            st.success(f"(Mock response) You entered: {prompt}. Possible condition: Flu or Viral Fever.")
         else:
             st.warning("⚠️ Please enter a symptom before submitting.")
 
