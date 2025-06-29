@@ -1,6 +1,6 @@
 import streamlit as st
 import requests 
-import streamlit as st
+
 
 def main():
     st.set_page_config(page_title="HealthAI", layout="wide")
