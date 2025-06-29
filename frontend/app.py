@@ -1,5 +1,21 @@
 import streamlit as st
-import requests
+import requests 
+import streamlit as st
+
+def main():
+    st.set_page_config(page_title="HealthAI", layout="wide")
+    st.title("🏥 HealthAI - Intelligent Healthcare Assistant")
+    st.write("Welcome to the SmartInternz IBM project!")
+    
+    # Example UI
+    st.header("👤 Patient Chat")
+    user_input = st.text_input("Ask something about your health:")
+    if st.button("Submit"):
+        st.success(f"(Mock response) You asked: {user_input}")
+
+if __name__ == "__main__":
+    main()
+
 
 st.set_page_config(page_title="HealthAI Assistant", page_icon="🧠")
 st.title("🧠 HealthAI - Disease Assistant")
